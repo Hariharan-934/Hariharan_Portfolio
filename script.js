@@ -2,7 +2,7 @@
    TYPING + DELETING LOOP (ROTATING TITLES)
 ========================================== */
 
-const roles = ["Python","App","Web","SQL"];
+const roles = ["Python Developer","Vibecoder","App Developer","Web Developer","SQL Developer"];
 const typingElement = document.getElementById("typing");
 
 let roleIndex = 0;
@@ -31,7 +31,7 @@ function typeLoop() {
         }
     }
 
-    setTimeout(typeLoop, isDeleting ? 60 : 120);
+    setTimeout(typeLoop, isDeleting ? 50 : 100);
 }
 
 typeLoop();
