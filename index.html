@@ -73,7 +73,7 @@ window.addEventListener("load", function () {
 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(0,198,255,0.9)";
+            ctx.fillStyle = "rgba(230,230,230,0.9)";
             ctx.fill();
         });
 
@@ -88,7 +88,7 @@ window.addEventListener("load", function () {
                 if (distance < 120) {
                     let opacity = 1 - (distance / 120);
                     ctx.beginPath();
-                    ctx.strokeStyle = "rgba(0,198,255," + opacity * 0.3 + ")";
+                    ctx.strokeStyle = "rgba(220,220,220," + opacity * 0.35 + ")";
                     ctx.moveTo(particles[a].x, particles[a].y);
                     ctx.lineTo(particles[b].x, particles[b].y);
                     ctx.stroke();
@@ -120,10 +120,6 @@ window.addEventListener("load", function () {
 
 });
 </script>
-
-
-
-
 
 <body>
 
@@ -174,8 +170,7 @@ window.addEventListener("load", function () {
 
             <div class="about-text">
                 <p>
-                   I’m Hariharan, a Python and Django developer passionate about building scalable web applications.
-                    I’m also eager to work with AI to create smarter, innovative solutions.
+                   I’m Hariharan, a Python and Django developer from Tirunelveli, Tamil Nadu, passionate about building scalable web applications and solving real-world problems through clean code. I’m actively exploring AI to build smarter, next-generation solutions.
                 </p>
             </div>
 
@@ -186,6 +181,7 @@ window.addEventListener("load", function () {
 </section>
 
 <section class="section" id="skills">
+    <canvas id="skillsParticles"></canvas>
     <div class="content">
         <h2>Skills & Tools</h2>
 
@@ -198,29 +194,36 @@ window.addEventListener("load", function () {
     <div class="skill-line">
         <span>Python</span>
         <div class="progress-bar">
-            <div class="skill-progress" style="width:85%"></div>
+            <div class="skill-progress" data-width="85%"></div>
         </div>
     </div>
 
     <div class="skill-line">
         <span>Django</span>
         <div class="progress-bar">
-            <div class="skill-progress" style="width:75%"></div>
+            <div class="skill-progress" data-width="75%"></div>
+        </div>
+    </div>
+    <div class="skill-line">
+        <span>FastAPI</span>
+        <div class="progress-bar">
+            <div class="skill-progress" data-width="80%"></div>
         </div>
     </div>
 
     <div class="skill-line">
         <span>SQL</span>
         <div class="progress-bar">
-            <div class="skill-progress" style="width:90%"></div>
+            <div class="skill-progress" data-width="90%"></div>
         </div>
     </div>
     <div class="skill-line">
         <span>Html/CSS</span>
         <div class="progress-bar">
-            <div class="skill-progress" style="width:80%"></div>
+            <div class="skill-progress" data-width="80%"></div>
         </div>
     </div>
+    
 </div>
 
 
@@ -254,24 +257,51 @@ window.addEventListener("load", function () {
 
                 <!-- Project 1 -->
                 <div class="project-card">
-                    <img src="images/ecom.jpg">
+                    <img src="images/ecom.png">
                     <div class="project-overlay">
                         <h3>E-Commerce Website</h3>
+                        <div class="project-info">
+                            <p class="project-description">
+                                A full-stack online store with product listings, cart flow, and secure checkout experience.
+                            </p>
                         <div class="project-links">
-                            <a href="#">Live</a>
+                            <a href="https://lnkd.in/gt2f6sN3">Live</a>
                             <a href="https://github.com/Hariharan-934/flipkartdemostore">GitHub</a>
+                        </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
                 <div class="project-card">
-                    <img src="images/ban.jpg">
+                    <img src="images/ban.png">
                     <div class="project-overlay">
                         <h3>Warehouse Billing System</h3>
+                        <div class="project-info">
+                            <p class="project-description">
+                                Billing and inventory workflow to manage stock entries, invoice generation, and sales records.
+                            </p>
                         <div class="project-links">
-                            <a href="#">Live</a>
+                            <a href="https://lnkd.in/gDfTYp3m">Live</a>
                             <a href="https://github.com/Hariharan-934/Bank_Management_System_Using_Python">GitHub</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="images/chat.png">
+                    <div class="project-overlay">
+                        <h3>AI_chat bot</h3>
+                        <div class="project-info">
+                            <p class="project-description">
+                                AI-powered chatbot API for handling user queries with quick contextual responses.
+                            </p>
+                        <div class="project-links">
+                            <a href="https://lnkd.in/gSaCa3-Q">Live</a>
+                            <a href="https://github.com/Hariharan-934/chatbot_api">GitHub</a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -281,9 +311,14 @@ window.addEventListener("load", function () {
                     <img src="images/yoo.jpg">
                     <div class="project-overlay">
                         <h3>YOLO Object Detection</h3>
+                        <div class="project-info">
+                            <p class="project-description">
+                                Real-time object detection using YOLO to identify and classify multiple objects in frames.
+                            </p>
                         <div class="project-links">
                             <a href="#">Live</a>
                             <a href="#">GitHub</a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -299,33 +334,41 @@ window.addEventListener("load", function () {
 <section class="section" id="contact">
     <div class="contact-container">
 
-        <h2 class="contact-heading">Contact Me</h2>
+        <h2 class="contact-heading">Let's Work Together</h2>
+        <p class="contact-intro">
+            Open to full-time roles, freelance projects, and collaboration on Python, Django, and AI-focused products.
+        </p>
 
         <div class="contact-items">
 
             <a href="mailto:hari07052004@gmail.com" class="contact-card">
-                <h3>Email</h3>
+                <span class="contact-label">Email</span>
+                <h3>Primary Inbox</h3>
                 <p>hari07052004@gmail.com</p>
             </a>
 
             <a href="tel:+919344138635" class="contact-card">
-                <h3>Call</h3>
+                <span class="contact-label">Phone</span>
+                <h3>Direct Call</h3>
                 <p>+91 9344138635</p>
             </a>
 
-            <a href="https://www.linkedin.com/in/hariharan-s-b28a1127b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="contact-card">
-                <h3>LinkedIn</h3>
-                <p>linkedin.com/in/Hariharan s</p>
+            <a href="https://www.linkedin.com/in/hariharan-s-b28a1127b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <span class="contact-label">Network</span>
+                <h3>LinkedIn Profile</h3>
+                <p>linkedin.com/in/hariharan-s-b28a1127b</p>
             </a>
 
-            <a href="https://github.com/hariharan-934" target="_blank" class="contact-card">
-                <h3>GitHub</h3>
+            <a href="https://github.com/hariharan-934" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <span class="contact-label">Code</span>
+                <h3>GitHub Portfolio</h3>
                 <p>github.com/Hariharan-934</p>
             </a>
 
         </div>
 
     </div>
+    <canvas id="particles"></canvas>
 </section>
 
 </div>

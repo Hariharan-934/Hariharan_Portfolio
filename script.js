@@ -85,11 +85,89 @@ if (themeToggle) {
 ========================================== */
 
 const sections = document.querySelectorAll(".section");
+const skillSection = document.getElementById("skills");
+const skillBars = document.querySelectorAll(".skill-progress");
+const skillsCanvas = document.getElementById("skillsParticles");
+const skillsCtx = skillsCanvas ? skillsCanvas.getContext("2d") : null;
+let skillsAnimated = false;
+let skillsBgParticles = [];
+
+function setupSkillsParticles() {
+    if (!skillsCanvas || !skillsCtx || !skillSection) return;
+
+    skillsCanvas.width = skillSection.offsetWidth;
+    skillsCanvas.height = skillSection.offsetHeight;
+
+    const count = Math.max(22, Math.floor(skillsCanvas.width / 40));
+    skillsBgParticles = Array.from({ length: count }, () => ({
+        x: Math.random() * skillsCanvas.width,
+        y: Math.random() * skillsCanvas.height,
+        radius: Math.random() * 1.6 + 1,
+        dx: (Math.random() - 0.5) * 0.35,
+        dy: (Math.random() - 0.5) * 0.35
+    }));
+}
+
+function animateSkillsParticles() {
+    if (!skillsCanvas || !skillsCtx) return;
+
+    skillsCtx.clearRect(0, 0, skillsCanvas.width, skillsCanvas.height);
+
+    skillsBgParticles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > skillsCanvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > skillsCanvas.height) p.dy *= -1;
+
+        skillsCtx.beginPath();
+        skillsCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        skillsCtx.fillStyle = "rgba(235,235,235,0.55)";
+        skillsCtx.fill();
+    });
+
+    for (let a = 0; a < skillsBgParticles.length; a++) {
+        for (let b = a + 1; b < skillsBgParticles.length; b++) {
+            const dx = skillsBgParticles[a].x - skillsBgParticles[b].x;
+            const dy = skillsBgParticles[a].y - skillsBgParticles[b].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 100) {
+                const opacity = 1 - (distance / 100);
+                skillsCtx.beginPath();
+                skillsCtx.strokeStyle = "rgba(210,210,210," + opacity * 0.18 + ")";
+                skillsCtx.moveTo(skillsBgParticles[a].x, skillsBgParticles[a].y);
+                skillsCtx.lineTo(skillsBgParticles[b].x, skillsBgParticles[b].y);
+                skillsCtx.stroke();
+            }
+        }
+    }
+
+    requestAnimationFrame(animateSkillsParticles);
+}
+
+if (skillsCanvas && skillsCtx) {
+    setupSkillsParticles();
+    window.addEventListener("resize", setupSkillsParticles);
+    animateSkillsParticles();
+}
+
+function animateSkillBars() {
+    if (skillsAnimated) return;
+    skillBars.forEach(bar => {
+        const targetWidth = bar.dataset.width || "0%";
+        bar.style.width = targetWidth;
+    });
+    skillsAnimated = true;
+}
 
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add("show");
+            if (entry.target === skillSection) {
+                animateSkillBars();
+            }
         }
     });
 }, { threshold: 0.3 });
