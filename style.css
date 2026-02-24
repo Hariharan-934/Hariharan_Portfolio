@@ -32,7 +32,24 @@ opacity:0;transform:translateY(60px);transition:0.8s;}
 
 #about{background:#f4f4f4;}
 #skills{position:relative;overflow:hidden;background:#222;color:white;}
-#projects{background:#111;color:white;}
+#projects{
+    position:relative;
+    background:#111;
+    color:white;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    gap:20px;
+}
+
+#projects h2{
+    margin-top:14px;
+    font-size:32px;
+}
+
+#skills h2{
+    font-size:32px;
+}
 #contact{background:#e3e3e3;}
 
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
@@ -61,15 +78,48 @@ body.light-mode .nav-links a{color:black;}
 .project-wrapper{
     position:relative;
     width:80%;
-    margin:auto;
-    display:flex;
+    margin:8px auto 0;
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    grid-template-areas:
+        "intro intro intro"
+        "left slider right";
     align-items:center;
-    justify-content:center;
+    column-gap:6px;
+}
+
+.project-intro{
+    grid-area:intro;
+    max-width:780px;
+    width:100%;
+    justify-self:center;
+    margin:0 0 12px;
+    color:#d8d8d8;
+    font-size:20px;
+    line-height:1.5;
+    text-align:center;
+}
+
+.project-note{
+    position:absolute;
+    left:50%;
+    bottom:14px;
+    transform:translateX(-50%);
+    width:90%;
+    margin-top:0;
+    font-size:16px;
+    font-weight:600;
+    color:#ffffff;
+    opacity:1;
+    text-align:center;
 }
 
 .project-slider{
+    grid-area:slider;
     overflow:hidden;
-    width:100%;
+    width:auto;
+    flex:1 1 auto;
+    min-width:0;
 }
 
 .project-track{
@@ -178,6 +228,7 @@ body.light-mode .nav-links a{color:black;}
     100% { opacity: 1; }
 }
 .arrow{
+    flex:0 0 auto;
     background:transparent;
     border:none;
     color:#e6e6e6;
@@ -186,6 +237,14 @@ body.light-mode .nav-links a{color:black;}
     padding:10px 15px;
     text-shadow:0 2px 6px rgba(0,0,0,0.45);
     transition:color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+.arrow.left{
+    grid-area:left;
+}
+
+.arrow.right{
+    grid-area:right;
 }
 
 .arrow:hover{
@@ -197,6 +256,71 @@ body.light-mode .nav-links a{color:black;}
 @media(max-width:768px){
     .project-card{
         height:250px;
+    }
+}
+
+@media (max-width: 768px) {
+    #projects {
+        padding-top: 90px;
+    }
+
+    #projects h2 {
+        margin-top: 10px;
+        font-size: 32px;
+    }
+
+    .project-wrapper {
+        width: 100%;
+    }
+
+    .project-intro {
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+
+    .project-card {
+        height: 360px;
+    }
+
+    .project-overlay {
+        opacity: 1;
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 18px 16px;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 20%, rgba(0, 0, 0, 0.9) 100%);
+    }
+
+    .project-overlay h3 {
+        font-size: 22px;
+        text-align: left;
+        margin: 0;
+    }
+
+    .project-info {
+        opacity: 1;
+        transform: none;
+        margin-top: auto;
+        padding: 0;
+        background: transparent;
+        align-items: flex-start;
+    }
+
+    .project-description {
+        max-width: 100%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 1.5;
+        pointer-events: auto;
+    }
+
+    .project-links {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .project-links a {
+        padding: 8px 14px;
+        font-size: 14px;
     }
 }
 
@@ -356,6 +480,7 @@ body {
     background: linear-gradient(120deg, #0b141b, #12232d, #0e1820, #1b2c36);
     background-size: 300% 300%;
     animation: contactGradientMove 14s ease infinite;
+    overflow-x: hidden;
 }
 
 @keyframes contactGradientMove {
@@ -368,6 +493,7 @@ body {
     max-width: 980px;
     margin: 0 auto;
     text-align: center;
+    width: 100%;
 }
 
 .contact-heading {
@@ -435,6 +561,7 @@ body {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.86);
     word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* Hover */
@@ -446,12 +573,31 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    #contact {
+        height: auto;
+        min-height: 100vh;
+        padding: 72px 16px;
+        overflow-x: clip;
+    }
+
+    .contact-label {
+        display: none;
+    }
+
+    .contact-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .contact-items {
         grid-template-columns: 1fr;
+        width: 100%;
     }
 
     .contact-card {
         text-align: center;
+        min-width: 0;
+        width: 100%;
     }
 }
 
